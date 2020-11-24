@@ -31,9 +31,9 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#setup">Setup</a></li>
       </ul>
     </li>
-    <li><a href="#installation">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -66,9 +66,9 @@ To get a local copy of the project up and running, follow these steps.
 ### Prerequisites
 
 The project was intended to be used with the [LEMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04) 
-/[LAMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) stack.
+/ [LAMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) stack.
 
-## Usage
+### Setup
 
 * Clone the repo
    ```sh
@@ -81,7 +81,7 @@ The project was intended to be used with the [LEMP](https://www.digitalocean.com
 
 * Replace the contents of `/db/conn.php` with your MySQL username, password, server.
 
-You can now access your website at [http://127.0.0.0:80/libri](http://127.0.0.0:80/libri)
+If you have used the default Nginx/Apache conf file, you can access your website at [http://localhost:80/libri](http://localhost:80/libri)
 
 
 <!-- ROADMAP -->
