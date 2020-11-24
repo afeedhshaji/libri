@@ -65,36 +65,23 @@ To get a local copy of the project up and running, follow these steps.
 
 ### Prerequisites
 
-The project was intended to be used with the LAMP stack. Following are the steps to install the same.
-* Apache
-  ```sh
-  sudo apt install apache2
-  ```
-* MySQL
-  ```sh
-  sudo apt install mysql-server
-  ```
-* PHP
-  ```sh
-  sudo apt install php libapache2-mod-php php-mysql
-  ```
-
-
+The project was intended to be used with the [LEMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04) 
+/[LAMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) stack.
 
 ## Usage
 
 * Clone the repo
    ```sh
    git clone git@github.com/afeedh/libri
-   ```
-* Place your website in the root directory of the web server. For apache, default root directory is : `/var/www/html/`
+   ``` 
+
+* Place your website in the root directory of the web server as set in the Nginx/Apache conf file.
 
 * Use MySQL shell or phpMyAdmin to create a new database named “LMS”.
 
 * Replace the contents of `/db/conn.php` with your MySQL username, password, server.
 
 You can now access your website at [http://127.0.0.0:80/libri](http://127.0.0.0:80/libri)
-
 
 
 <!-- ROADMAP -->
