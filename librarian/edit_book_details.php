@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Member/EditProfile Page
+ * Librarian/EditBookDetails Page
  * Author: Afeedh Shaji
  * Handle: @afeedh
  */
@@ -29,7 +29,7 @@ if ($_SESSION['RollNo']) {
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
     <link rel="stylesheet" href="./css/main.css">
-    <title>Member-Suggest Books</title>
+    <title>Librarian - Edit Book Details</title>
 </head>
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -37,14 +37,24 @@ if ($_SESSION['RollNo']) {
     <div class="flex flex-col h-screen justify-between">
 
         <!--Header-->
-        <?php include('../common/header.php'); ?>
+        <?php include('../common/header_admin.php'); ?>
         <!--/Header-->
 
         <!--Container-->
         <div class="flex items-center justify-center bg-gray-50 pt-20 h-full">
             <div class="container lg:max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <form class="bg-white p-6 lg:p-12 rounded-3xl shadow-lg text-black w-full"
-                    x-data="{password: '',password_confirm: ''}" method="POST">
+                <?php
+                    $bookid = $_GET['id'];
+                    $sql = "select * from LMS.book where Bookid='$bookid'";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    $name = $row['Title'];
+                    $publisher = $row['Publisher'];
+                    $year = $row['Year'];
+                    $avail = $row['Availability'];
+                    ?>
+
+                <form class="bg-white p-6 lg:p-12 rounded-3xl shadow-lg text-black w-full" method="POST">
                     <div class="flex justify-center">
 
                         <svg class="h-9 w-9 text-indigo-500 group-hover:text-indigo-400"
@@ -53,28 +63,27 @@ if ($_SESSION['RollNo']) {
                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
                         <h1 class="mb-8 text-center text-3xl font-extrabold text-gray-900 pl-2">
-                            My Profile</h1>
+                            Edit Book Details</h1>
                     </div>
-
-                    <label for="name">Full Name</label>
+                    <label for="name">Book Name</label>
                     <input type="text"
                         class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                        name="name" value=<?php echo $name ?> required />
+                        name="title" value=<?php echo $name ?> required />
 
-                    <label for="email">E-mail</label>
+                    <label for="publisher">Publisher</label>
                     <input type="text"
                         class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                        name="email" value=<?php echo $email ?> required />
+                        name="publisher" value=<?php echo $publisher ?> required />
 
-                    <label for="mobno">Mobile Number</label>
+                    <label for="year">Year</label>
                     <input type="text"
                         class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                        name="mobno" value=<?php echo $mobno ?> required />
+                        name="year" value=<?php echo $year ?> required />
 
-                    <label for="password">Password</label>
+                    <label for="availability">Availability</label>
                     <input type="text"
                         class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                        name="password" value=<?php echo $pswd ?> required />
+                        name="availability" value=<?php echo $avail ?> required />
 
 
 
@@ -84,7 +93,7 @@ if ($_SESSION['RollNo']) {
                             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                                 <!-- Heroicon name: lock-closed -->
                             </span>
-                            Edit
+                            Update
                         </button>
                     </div>
 
@@ -106,17 +115,19 @@ if ($_SESSION['RollNo']) {
     <script src="/static/js/script.js"></script>
 
     <?php
-        if (isset($_POST['submit'])) {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $mobno = $_POST['mobno'];
-            $pswd = $_POST['password'];
 
-            $sql1 = "update LMS.user set Name='$name', EmailId='$email', MobNo='$mobno', Password='$pswd' where RollNo='$rollno'";
+        if (isset($_POST['submit'])) {
+            $bookid = $_GET['id'];
+            $name = $_POST['title'];
+            $publisher = $_POST['publisher'];
+            $year = $_POST['year'];
+            $avail = $_POST['availability'];
+
+            $sql1 = "update LMS.book set Title='$name', Publisher='$publisher', Year='$year', Availability='$avail' where BookId='$bookid'";
 
             if ($conn->query($sql1) === TRUE) {
                 echo "<script type='text/javascript'>alert('Success')</script>";
-                header("Refresh:0.01; url=edit_profile.php", true, 303);
+                header('Location: ./edit_book_details.php');
             } else { //echo $conn->error;
                 echo "<script type='text/javascript'>alert('Error')</script>";
             }

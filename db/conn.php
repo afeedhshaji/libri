@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Login Page
- * Author: Afeedh Shaji
- * Handle: afeedh
- */
 session_start();
 $dbservername = "";
 $dbusername = "";

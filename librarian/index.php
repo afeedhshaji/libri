@@ -1,2 +1,2 @@
 <?php
-echo "Hello, librarian here!";
+header('Location: ./allbooks.php');

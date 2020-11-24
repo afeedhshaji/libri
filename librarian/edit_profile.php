@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Member/EditProfile Page
+ * Librarian/EditProfile Page
  * Author: Afeedh Shaji
  * Handle: @afeedh
  */
