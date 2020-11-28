@@ -76,15 +76,15 @@ require('./db/conn.php');
     <?php
     if (isset($_POST['signin'])) {
         $u = $_POST['rollno'];
-        $p = $_POST['password'];
+        $p = sha1($_POST['password']);
 
-        $sql = "select * from LMS.user where RollNo='$u'";
+        $sql = "select * from user where RollNo='$u'";
 
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $x = $row['Password'];
         $y = $row['Type'];
-        if (strcasecmp($x, $p) == 0 && !empty($u) && !empty($p)) { //echo "Login Successful";
+        if (strcasecmp($x, $p) == 0 && !empty($u) && !empty($p)) {
             $_SESSION['RollNo'] = $u;
 
             if ($y == 'Admin')

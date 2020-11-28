@@ -8,15 +8,13 @@
 require('../db/conn.php');
 if ($_SESSION['RollNo']) {
     $rollno = $_SESSION['RollNo'];
-    $sql = "select * from LMS.user where RollNo='$rollno'";
+    $sql = "select * from user where RollNo='$rollno'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
     $name = $row['Name'];
-    $category = $row['Category'];
     $email = $row['EmailId'];
     $mobno = $row['MobNo'];
-    $pswd = $row['Password'];
 ?>
 
 <!DOCTYPE html>
@@ -71,12 +69,6 @@ if ($_SESSION['RollNo']) {
                         class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                         name="mobno" value=<?php echo $mobno ?> required />
 
-                    <label for="password">Password</label>
-                    <input type="text"
-                        class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                        name="password" value=<?php echo $pswd ?> required />
-
-
 
                     <div>
                         <button type="submit" name="submit" value="Submit"
@@ -110,13 +102,12 @@ if ($_SESSION['RollNo']) {
             $name = $_POST['name'];
             $email = $_POST['email'];
             $mobno = $_POST['mobno'];
-            $pswd = $_POST['password'];
 
-            $sql1 = "update LMS.user set Name='$name', EmailId='$email', MobNo='$mobno', Password='$pswd' where RollNo='$rollno'";
+            $sql1 = "update user set Name='$name', EmailId='$email', MobNo='$mobno' where RollNo='$rollno'";
 
             if ($conn->query($sql1) === TRUE) {
                 echo "<script type='text/javascript'>alert('Success')</script>";
-                header("Refresh:0.01; url=edit_profile.php", true, 303);
+                header('Location: ./index.php');
             } else { //echo $conn->error;
                 echo "<script type='text/javascript'>alert('Error')</script>";
             }

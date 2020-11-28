@@ -8,15 +8,13 @@
 require('../db/conn.php');
 if ($_SESSION['RollNo']) {
     $rollno = $_SESSION['RollNo'];
-    $sql = "select * from LMS.user where RollNo='$rollno'";
+    $sql = "select * from user where RollNo='$rollno'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
     $name = $row['Name'];
-    $category = $row['Category'];
     $email = $row['EmailId'];
     $mobno = $row['MobNo'];
-    $pswd = $row['Password'];
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +41,7 @@ if ($_SESSION['RollNo']) {
         <!--Container-->
         <div class="flex items-center justify-center bg-gray-50 pt-20 h-full">
             <div class="container lg:max-w-lg mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <form class="bg-white p-6 lg:p-12 rounded-3xl shadow-lg text-black w-full"
-                    x-data="{password: '',password_confirm: ''}" method="POST">
+                <form class="bg-white p-6 lg:p-12 rounded-3xl shadow-lg text-black w-full" method="POST">
                     <div class="flex justify-center">
                         <svg class="h-10 w-10 text-indigo-500 group-hover:text-indigo-400"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,7 +100,7 @@ if ($_SESSION['RollNo']) {
             $Description = $_POST['description'];
             $rollno = $_SESSION['RollNo'];
 
-            $sql1 = "insert into LMS.recommendations (Book_Name,Description,RollNo) values ('$title','$Description','$rollno')";
+            $sql1 = "insert into recommendations (Book_Name,Description,RollNo) values ('$title','$Description','$rollno')";
 
 
 

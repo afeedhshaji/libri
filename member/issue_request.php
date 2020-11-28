@@ -8,7 +8,7 @@ $id = $_GET['id'];
 // Roll Num from session
 $roll = $_SESSION['RollNo'];
 
-$sql = "insert into LMS.record (RollNo,BookId,Time) values ('$roll','$id', curtime())";
+$sql = "insert into record (RollNo,BookId,Time) values ('$roll','$id', curtime())";
 
 if ($conn->query($sql) === TRUE) {
     echo "<script type='text/javascript'>alert('Request Sent to Admin.')</script>";

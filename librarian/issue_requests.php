@@ -8,15 +8,13 @@
 require('../db/conn.php');
 if ($_SESSION['RollNo']) {
     $rollno = $_SESSION['RollNo'];
-    $sql = "select * from LMS.user where RollNo='$rollno'";
+    $sql = "select * from user where RollNo='$rollno'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
     $name = $row['Name'];
-    $category = $row['Category'];
     $email = $row['EmailId'];
     $mobno = $row['MobNo'];
-    $pswd = $row['Password'];
 ?>
 
 <!DOCTYPE html>
@@ -44,34 +42,10 @@ if ($_SESSION['RollNo']) {
         <div class="container w-full mx-auto pt-20 lg:pt-40">
 
             <div class="w-full px-4 md:px-0 mb-16 text-gray-800 leading-normal">
-                <div
-                    class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white px-12 mb-5">
-                    <div class="flex justify-between">
-                        <div class="inline-flex border rounded  px-2 lg:px-6 h-12 bg-transparent w-full lg:w-1/2">
-                            <div class="flex flex-wrap items-stretch w-full h-full mb-6 relative">
-                                <div class="flex">
-                                    <span
-                                        class="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm">
-                                        <svg width="18" height="18" class="w-4 lg:w-auto" viewBox="0 0 18 18"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z"
-                                                stroke="#455A64" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M16.9993 16.9993L13.1328 13.1328" stroke="#455A64"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <input type="text"
-                                    class="flex-shrink flex-grow flex-auto leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-3 relative focus:outline-none text-xxs lg:text-xs lg:text-base text-gray-500 font-thin"
-                                    placeholder="Search">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
                 <?php
-                    $sql = "select * from LMS.record,LMS.book where Date_of_Issue is NULL and record.BookId=book.BookId order by Time";
+                    $sql = "select * from record,book where Date_of_Issue is NULL and record.BookId=book.BookId order by Time";
 
                     $result = $conn->query($sql);
                     $rowcount = mysqli_num_rows($result);

@@ -47,6 +47,14 @@ require('./db/conn.php');
                     class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     name="phoneno" placeholder="Phone Number" pattern="^\d{10}$" required />
 
+                <select name="category" id="category"
+                    class="bg-transparent	 w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                    <option value="GEN">General</option>
+                    <option value="OBC">OBC</option>
+                    <option value="SC">SC</option>
+                    <option value="ST">ST</option>
+                </select>
+
                 <input type="password"
                     class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     name="password" placeholder="Password" x-model="password" required />
@@ -54,6 +62,7 @@ require('./db/conn.php');
                 <input type="password"
                     class="w-full mb-4 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     name="confirm_password" placeholder="Confirm Password" x-model="password_confirm" required />
+
 
                 <div class="flex mb-4 justify-start ml-4 p-1">
                     <ul>
@@ -135,13 +144,13 @@ require('./db/conn.php');
     if (isset($_POST['signup'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = sha1($_POST['password']);
+        $category = $_POST['category'];
         $mobno = $_POST['phoneno'];
         $rollno = $_POST['rollno'];
-        $category = "GEN";
         $type = 'Student';
 
-        $sql = "insert into LMS.user (Name,Type,Category,RollNo,EmailId,MobNo,Password) values ('$name','$type','$category','$rollno','$email','$mobno','$password')";
+        $sql = "insert into user (Name,Type,Category,RollNo,EmailId,MobNo,Password) values ('$name','$type','$category','$rollno','$email','$mobno','$password')";
 
         if ($conn->query($sql) === TRUE) {
             echo "<script type='text/javascript'>alert('Registration Successful')</script>";
