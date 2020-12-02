@@ -11,7 +11,7 @@ $sql1 = "update record set Date_of_Return=curdate(),Dues='$dues' where BookId='$
 if ($conn->query($sql1) === TRUE) {
     $sql3 = "update book set Availability=Availability+1 where BookId='$bookid'";
     $result = $conn->query($sql3);
-    $sql4 = "delete from return where BookId='$bookid' and RollNo='$rollno'";
+    $sql4 = "delete from libridb.return where BookId='$bookid' and RollNo='$rollno'";
     $result = $conn->query($sql4);
     $sql6 = "delete from renew where BookId='$bookid' and RollNo='$rollno'";
     $result = $conn->query($sql6);

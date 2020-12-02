@@ -1,14 +1,13 @@
 <?php
 
 session_start();
-$dbservername = "";
-$dbusername = "";
-$dbpassword = "";
-$dbname = "";
+$dbservername = "localhost";
+$dbusername = "webp";
+$dbpassword = "Webp@1593";
+$dbname = "libridb";
 
 $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 
 if (!$conn) {
-    echo "Connected unsuccessfully";
     die("Connection failed: " . mysqli_connect_error());
 }

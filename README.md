@@ -75,19 +75,53 @@ The project was intended to be used with the [LEMP](https://www.digitalocean.com
    git clone git@github.com/afeedh/libri
    ``` 
 
-* Place your website in the root directory of the web server as set in the Nginx/Apache conf file.
 
-* Use MySQL shell or phpMyAdmin to create a new database named “LMS”.
+* Specify the root directory of the website in the Nginx/Apache server conf file. A sample Nginx conf file is show below : 
 
-* Replace the contents of `/db/conn.php` with your MySQL username, password, server.
+```
+server {
+  
+    listen 80;
+    root /var/www/html/libri/;
+    index index.php;
+    server_name _;
 
-If you have used the default Nginx/Apache conf file, you can access your website at [http://localhost:80/libri](http://localhost:80/libri)
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        }
+}
+```
+
+* Use MySQL shell or phpMyAdmin to create a new database. 
+
+* [Optional] Create a MySQL user and grant read/write privileges of the database to that user
+```
+CREATE USER 'testuser'@'%' IDENTIFIED BY ']7MtN-lgg@O^';
+GRANT ALL PRIVILEGES ON testlibridb.* TO 'testuser'@'%
+FLUSH PRIVILEGES;
+```
+
+* Replace the contents of `/db/conn.php` with your MySQL username, password, server, db name.
+
+* The index file is `index.php`
+
+* Go to `dumps` folder and import the sql dumps to your database using 
+  ```sh
+  cat *.sql | mysql -u dbuser -p dbname
+  ```
+
+If you have used the default Nginx/Apache conf file, you can access your website at [http://localhost/](http://localhost/)
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/afeedh/libri/issues) for a list of proposed features (and known issues).
+
+## Demo Link
+
+Project Link : [https://ka.libri.afeedhshaji.me](https://ka.libri.afeedhshaji.me)
 
 
 <!-- LICENSE -->
@@ -96,11 +130,5 @@ See the [open issues](https://github.com/afeedh/libri/issues) for a list of prop
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-<!-- CONTACT -->
-## Contact
-
-Afeedh Shaji - afeedhshaji98@gmail.com
-
-Project Link: [https://github.com/afeedh/libri](https://github.com/afeedh/libri)
 
 [product-screenshot]:https://cdn.glitch.com/36e1bf5d-46aa-4bf1-ac11-131e5426a4d5%2Flogin_libri.png?v=1606148990897

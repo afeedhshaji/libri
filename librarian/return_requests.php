@@ -44,7 +44,7 @@ if ($_SESSION['RollNo']) {
 
 
                 <?php
-                    $sql = "select return.BookId,return.RollNo,Title,datediff(curdate(),Due_Date) as x from return,book,record where return.BookId=book.BookId and return.BookId=record.BookId and return.RollNo=record.RollNo";
+                    $sql = "select libridb.return.BookId,libridb.return.RollNo,Title,datediff(curdate(),Due_Date) as x from libridb.return,book,record where libridb.return.BookId=book.BookId and libridb.return.BookId=record.BookId and libridb.return.RollNo=record.RollNo";
 
                     $result = $conn->query($sql);
                     $rowcount = mysqli_num_rows($result);

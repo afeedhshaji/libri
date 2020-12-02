@@ -5,7 +5,7 @@ $id = $_GET['id'];
 
 $roll = $_SESSION['RollNo'];
 
-$sql = "insert into return (RollNo,BookId) values ('$roll','$id')";
+$sql = "insert into libridb.return (RollNo,BookId) values ('$roll','$id')";
 
 if ($conn->query($sql) === TRUE) {
     echo "<script type='text/javascript'>alert('Request Sent to Admin.')</script>";
