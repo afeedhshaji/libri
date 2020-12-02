@@ -2,9 +2,9 @@
 
 session_start();
 $dbservername = "localhost";
-$dbusername = "webp";
-$dbpassword = "Webp@1593";
-$dbname = "libridb";
+$dbusername = "";
+$dbpassword = "";
+$dbname = "";
 
 $conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 
