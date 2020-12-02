@@ -121,7 +121,7 @@ See the [open issues](https://github.com/afeedh/libri/issues) for a list of prop
 
 ## Demo Link
 
-Project Link : [https://ka.libri.afeedhshaji.me](https://ka.libri.afeedhshaji.me)
+Project Link : [https://libri.ka.afeedhshaji.me](https://ka.libri.afeedhshaji.me)
 
 
 <!-- LICENSE -->
